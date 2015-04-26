@@ -10,12 +10,17 @@ b {
 	color: #7a161a;
 }
 
+.header {
+text-align:center;
+}
+
 .header .description {
 	padding-top: 20px;
 }
 
 .main {
 	padding : 0 0 10px 0;
+	
 }
 
 .secondary {

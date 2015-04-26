@@ -54,7 +54,8 @@ var mapOption = {
         {
             name: 'USA PopEstimates',
             type: 'map',
-            roam: true,
+            roam: true,			
+            hoverable: false,
             mapType: 'USA', // 自定义扩展图表类型
 			markPoint : {
                 symbolSize: 5,       // 标注大小，半宽（半径）参数，当图形为方向或菱形则总宽度为symbolSize * 2
@@ -79,7 +80,7 @@ var mapOption = {
 					]
 				},
 				 geoCoord: {
-                "Asal":[96.113891,2.739723],
+                "Asal":[121.15,31.89],
 				},
 			
 				
