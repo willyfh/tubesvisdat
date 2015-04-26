@@ -56,6 +56,34 @@ var mapOption = {
             type: 'map',
             roam: true,
             mapType: 'USA', // 自定义扩展图表类型
+			markPoint : {
+                symbolSize: 5,       // 标注大小，半宽（半径）参数，当图形为方向或菱形则总宽度为symbolSize * 2
+                itemStyle: {
+                    normal: {
+                        borderColor: '#87cefa',
+                        borderWidth: 1,            // 标注边线线宽，单位px，默认为1
+                        label: {
+                            show: false
+                        }
+                    },
+                    emphasis: {
+                        borderColor: '#1e90ff',
+                        borderWidth: 5,
+                        label: {
+                            show: false
+                        }
+                    }
+                },
+				  data : [
+                    {name: "Asal", value: 9}
+					]
+				},
+				 geoCoord: {
+                "Asal":[96.113891,2.739723],
+				},
+			
+				
+				
             itemStyle:{
                 emphasis:{label:{show:true}}
             },
