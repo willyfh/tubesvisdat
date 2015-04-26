@@ -709,7 +709,10 @@ var mapOption = {
             markPoint : {
                 symbol:'emptyCircle',
                 symbolSize : function (v){
-                    return ((v*v)/4)
+					if(v > 6) {
+						return (v*v)
+					} else {
+                    return ((v*v)/4) }
                 },
                 effect : {
                     show: true,
