@@ -23,11 +23,11 @@ var mapOption = {
             fontFamily : "'Lora', serif",
         }
     },
-	    legend: {
-        orient: 'vertical',
-        x:'left',
-        data:['Gempa']
-    },
+	    // legend: {
+        // orient: 'vertical',
+        // x:'left',
+        // data:['Gempa']
+   // },
     tooltip : {
         trigger: 'item',
        /* showDelay: 0,
@@ -930,8 +930,8 @@ var mapOption = {
 
 var modusOption = {
     title : {
-        text: 'Korupsi Berdasarkan Modus',
-        subtext: 'Jumlah Kasus Pada Semester I 2014',
+        text: 'Top 5 Kasus Gempa Tertinggi',
+        subtext: 'Data gempa untuk tahun 2014',
         textStyle : {
             fontFamily : "'Lora', serif",
         },
@@ -970,7 +970,7 @@ var modusOption = {
     yAxis : [
         {
             type : 'category',
-            data : ['Anggaran\nGanda','Pungutan\nLiar','Suap','Kegiatan\nFiktif','Pemotongan\nAnggaran','Penyalahgunaan\nWewenang','Mark up','Laporan\nFiktif','Penggelapan','Penyalahgunaan\nAnggaran'],
+             data : ['104 km BaratDaya KEBUMEN-JATENG','115 km BaratLaut HALMAHERABARAT-MALUT','135 km BaratLaut HALMAHERABARAT-MALUT','137 km BaratLaut HALMAHERABARAT-MALUT','132 km BaratLaut HALMAHERABARAT-MALUT'],
             axisLabel : {
                 textStyle : {
                     fontFamily : "'Lora', serif",
@@ -985,9 +985,9 @@ var modusOption = {
     series : [
         {
             type:'bar',
-            data:[1, 8, 11, 12, 15, 20,33,66,71,71],
+           data:[6.5,6.7,6.8,7.3,7.3],
             itemStyle: {
-                normal:{color:'indianred'}
+                normal:{color:'darkred'}
             },
         }
     ]
@@ -995,8 +995,8 @@ var modusOption = {
 
 var sectorOption = {
     title : {
-        text: 'Kasus Korupsi Berdasarkan Sektor',
-        subtext: 'Jumlah Kasus Pada Semester I 2014',
+        text: 'Jumlah Gempa Tiap Pulau',
+        subtext: 'data diambil pada tahun 2014',
         textStyle : {
             fontFamily : "'Lora', serif",
         },
@@ -1035,7 +1035,7 @@ var sectorOption = {
     yAxis : [
         {
             type : 'category',
-            data : ['Pertambangan','Air\nBersih','Pertahanan','Perizinan','Perhubungan','Keagamaan','Perpajakan','Kehutanan','Kelautan\nPerikanan','Olahraga','Peternakan','Energi','Keuangan\nPusat','Tata Kota','Pemilu','Perbankan','Peradilan','Kepegawaian','Pertanian','Sosial','Kesehatan','Pendidikan','Keuangan\nDaerah','Infrastruktur'],
+            data : ['Kalimantan','NTT-NTB','Jawa','Papua','Sulawesi','Sumatera','Maluku'],
             axisLabel : {
                 textStyle : {
                     fontFamily : "'Lora', serif",
@@ -1050,9 +1050,9 @@ var sectorOption = {
     series : [
         {
             type:'bar',
-            data:[1,2,3,3,3,3,5,5,6,6,7,7,7,7,9,10,11,15,16,31,38,59,116,175],
+            data:[0,8,18,20,36,48,71],
             itemStyle: {
-                normal:{color:'indianred'}
+                normal:{color:'darkred'}
             },
         }
     ]
