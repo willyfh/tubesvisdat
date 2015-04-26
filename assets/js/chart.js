@@ -30,24 +30,26 @@ var mapOption = {
    // },
     tooltip : {
         trigger: 'item',
-       /* showDelay: 0,
+        showDelay: 0,
         transitionDuration: 0.2,
         formatter : function (params) {
             var value = (params.value + '').split('.');
             value = value[0].replace(/(\d{1,3})(?=(?:\d{3})+(?!\d))/g, '$1,');
             return params.seriesName + '<br/>' + params.name + ' : ' + value;
-        }*/
+        }
     },
     dataRange: {
-	    show : false,
-        x : 'left',
-        y : 'bottom',
+	    
+        x : 'right',
+        y : 'top',
         min: 4.2,
         max: 7.3,
+		splitNumber : 0,
         color: ['darkred','red','orange','yellow','lightgreen','green'],
 
-        text:['Tinggi','Rendah'],
-        calculable : true,
+        text:['7.3 SR','4.2 SR'],
+		
+        calculable : false,
         textStyle : {
             fontFamily : "'Lora', serif",
         }
@@ -66,7 +68,7 @@ var mapOption = {
     },
     series : [
         {
-            name: 'Gempa',
+            name: '',
             type: 'map',
             hoverable: false,
             roam: true,
