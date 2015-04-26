@@ -973,7 +973,7 @@ var modusOption = {
     yAxis : [
         {
             type : 'category',
-             data : ['104 km BaratDaya KEBUMEN-JATENG','115 km BaratLaut HALMAHERABARAT-MALUT','135 km BaratLaut HALMAHERABARAT-MALUT','137 km BaratLaut HALMAHERABARAT-MALUT','132 km BaratLaut HALMAHERABARAT-MALUT'],
+             data : ['104 km \nBaratDaya \nKEBUMEN-JATENG','115 km \nBaratLaut \nHALMAHERABARAT-MALUT','135 km \nBaratLaut \nHALMAHERABARAT-MALUT','137 km \nBaratLaut \nHALMAHERABARAT-MALUT','132 km \nBaratLaut \nHALMAHERABARAT-MALUT'],
             axisLabel : {
                 textStyle : {
                     fontFamily : "'Lora', serif",
