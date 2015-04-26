@@ -542,7 +542,7 @@ var mapOption = {
 					{name:"140 km BaratLaut HALMAHERABARAT-MALUT",value:	5.8},
 					{name:"58 km TimurLaut BANGGAIKEP-SULTENG",value:	5.0},
 					{name:"37 km TimurLaut GUNUNGSITOLI-SUMUT",value:	5.3},
-					{name:"132 km BaratLaut HALMAHERABARAT-MALUT",value:	7.3},
+					{name:"132 km \nBaratLaut \nHALMAHERABARAT-\nMALUT",value:	7.3},
 					{name:"137 km BaratLaut HALMAHERABARAT-MALUT",value:	7.3},
 					{name:"133 km BaratLaut HALMAHERABARAT-MALUT",value:	5.0},
 					{name:"93 km Tenggara BOLAANGMONGONDOWSEL-SULUT",value:	6.3},
@@ -975,7 +975,7 @@ var modusOption = {
     yAxis : [
         {
             type : 'category',
-             data : ['104 km \nBaratDaya \nKEBUMEN-JATENG','115 km \nBaratLaut \nHALMAHERABARAT-MALUT','135 km \nBaratLaut \nHALMAHERABARAT-MALUT','137 km \nBaratLaut \nHALMAHERABARAT-MALUT','132 km \nBaratLaut \nHALMAHERABARAT-MALUT'],
+             data : ['104 km \nBaratDaya \nKEBUMEN-JATENG','115 km \nBaratLaut \nHALMAHERA\nBARAT-MALUT','135 km \nBaratLaut \nHALMAHERA\nBARAT-MALUT','137 km \nBaratLaut \nHALMAHERA\nBARAT-MALUT','132 km \nBaratLaut \nHALMAHERA\nBARAT-MALUT'],
             axisLabel : {
                 textStyle : {
                     fontFamily : "'Lora', serif",
