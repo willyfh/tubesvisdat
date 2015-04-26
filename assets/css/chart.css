@@ -1,0 +1,16 @@
+#map {
+	height: 400px;
+	width: 100%;
+}
+
+@media (min-width: 992px) {
+	#map {
+		height: 600px;
+		width: 100%;
+	}
+}
+
+.bar-chart {
+	height: 700px;
+	width: 100%;
+}
