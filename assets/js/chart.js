@@ -16,11 +16,13 @@ require.config({
 var mapOption = {
     title : {
         text: '',
-        subtext: 'Persebaran Gempa di Indonesia (2014)',
+        subtext: 'sumber data : http://geospasial.bnpb.go.id/pantauanbencana/data/datagempaall.php',
+	
         x:'left',
         y:'bottom',
         subtextStyle : {
             fontFamily : "'Lora', serif",
+			color :'#333'
         }
     },
 	    // legend: {
@@ -32,22 +34,43 @@ var mapOption = {
         trigger: 'item',
         showDelay: 0,
         transitionDuration: 0.2,
+	
         formatter : function (params) {
-            var value = (params.value + '').split('.');
-            value = value[0].replace(/(\d{1,3})(?=(?:\d{3})+(?!\d))/g, '$1,');
-            return params.seriesName + '<br/>' + params.name + ' : ' + value;
+            var value = (params.value + ' SR');
+			if (params.value=='-'){
+				return '-';
+			}else{
+				return "Lokasi : "+params.name + '<br/>Magnitude : ' + value;
+			}
         }
-    },
+    },/*
+	roamController: {
+		show:true,
+		orient:'vertica',
+		 x : 'right',
+        y : 'bottom',
+		mapTypeControl:{
+			USA:true
+		},
+	},*/
     dataRange: {
 	    
         x : 'right',
         y : 'top',
-        min: 4.2,
-        max: 7.3,
-		splitNumber : 0,
-        color: ['darkred','red','orange','yellow','lightgreen','green'],
+        min: 4.0,
+        max: 8.0,
+		precision:1,
+		formatter : function(v, v2){
+            return v + " SR - "+v2+" SR"
+        },
+		
+		selectedMode:true,
+		hoverLink : true,
+		realtime : true,
+		splitNumber : 4,
+        color: ['darkred','red','orange','yellow'],
 
-        text:['7.3 SR','4.2 SR'],
+       //text:['8.0 SR','4.0 SR'],
 		
         calculable : false,
         textStyle : {
@@ -84,11 +107,10 @@ var mapOption = {
                         }
                     },
                     emphasis: {
-                        borderColor: '#1e90ff',
+                        borderColor: '#333',
                         borderWidth: 5,
-                        label: {
-                            show: false
-                        }
+						
+                       
                     }
                 },
 				  data : [
@@ -501,7 +523,7 @@ var mapOption = {
 				 
            
             data:[
-                {name:"31 km BaratDaya CIANJUR-JABAR",value:	5.0},
+               /* {name:"31 km BaratDaya CIANJUR-JABAR",value:	5.0},
 					{name:"152 km BaratLaut MALUKUTENGGARABRT",value:	5.0},
 					{name:"81 km BaratDaya NABIRE-PAPUA",value:	5.4},
 					{name:"237 km BaratLaut MALUKUTENGGARABRT",value:	5.3},
@@ -701,7 +723,7 @@ var mapOption = {
 					{name:"72 km BaratDaya PANDEGLANG-BANTEN",value:	5.2},
 					{name:"267 km TimurLaut MALUKUBRTDAYA",value:	5.1},
 					{name:"75 km Tenggara PESAWARAN-LAMPUNG",value:	5.1},
-					{name:"92 km BaratLaut PULAUMOROTAI-MALUT",value:	5.2}
+					{name:"92 km BaratLaut PULAUMOROTAI-MALUT",value:	5.2}*/
             ]
         },   {
             name: '',
@@ -711,11 +733,15 @@ var mapOption = {
             markPoint : {
                 symbol:'emptyCircle',
                 symbolSize : function (v){
-					if(v > 6) {
+					if(v > 7) {
 						return (v*v)
-					} else {
-                    return ((v*v)/4) }
+					} else if(v>6) {
+						return ((v*v)/2)
+					}else {
+						return ((v*v)/4)
+					}
                 },
+				
                 effect : {
                     show: true,
                     shadowBlur : 0
@@ -723,7 +749,13 @@ var mapOption = {
                 itemStyle:{
                     normal:{
                         label:{show:false}
-                    }
+                    },emphasis: {
+                        
+                        borderWidth:0,
+                        label: {
+                            show: false
+                        }
+                    },
                 },
                 data : [
                    {name:"31 km BaratDaya CIANJUR-JABAR",value:	5.0},
@@ -933,19 +965,24 @@ var mapOption = {
     ]
 };
 
-var modusOption = {
+var topfiveOption = {
     title : {
         text: 'Top 5 Kasus Gempa Tertinggi',
-        subtext: 'Data gempa untuk tahun 2014',
+        subtext: 'Tahun 2014',
         textStyle : {
             fontFamily : "'Lora', serif",
+			
         },
         subtextStyle : {
             fontFamily : "'Lora', serif",
         }
     },
     tooltip : {
-        trigger: 'axis',
+        trigger: 'item',
+		formatter : function (params) {
+            var value = (params.value + ' SR');
+            return params.name + '<br/>' + value;
+        },
         axisPointer : { 
             type : 'shadow'
         },
@@ -969,17 +1006,33 @@ var modusOption = {
                 textStyle : {
                     fontFamily : "'Lora', serif",
                 }
+            },
+            axisLine : {
+                lineStyle : {
+                    color : 'dimgray'
+                }
+            },
+            axisTick : {
+                show : false
             }
         }
     ],
     yAxis : [
         {
             type : 'category',
-             data : ['104 km \nBaratDaya \nKEBUMEN-JATENG','115 km \nBaratLaut \nHALMAHERA\nBARAT-MALUT','135 km \nBaratLaut \nHALMAHERA\nBARAT-MALUT','137 km \nBaratLaut \nHALMAHERA\nBARAT-MALUT','132 km \nBaratLaut \nHALMAHERA\nBARAT-MALUT'],
+            data : ['104 km \nBaratDaya \nKEBUMEN-\nJATENG','115 km \nBaratLaut \nHALMAHERA\nBARAT-MALUT','135 km \nBaratLaut \nHALMAHERA\nBARAT-MALUT','137 km \nBaratLaut \nHALMAHERA\nBARAT-MALUT','132 km \nBaratLaut \nHALMAHERA\nBARAT-MALUT'],
             axisLabel : {
                 textStyle : {
                     fontFamily : "'Lora', serif",
                 }
+            },
+            axisLine : {
+                lineStyle : {
+                    color : 'dimgray'
+                }
+            },
+            axisTick : {
+                show : false
             }
        }
     ],
@@ -998,10 +1051,10 @@ var modusOption = {
     ]
 };
 
-var sectorOption = {
+var pulauOption = {
     title : {
-        text: 'Jumlah Gempa Tiap Pulau',
-        subtext: 'data diambil pada tahun 2014',
+        text: 'Jumlah Kasus Gempa Tiap Pulau',
+        subtext: 'Tahun 2014',
         textStyle : {
             fontFamily : "'Lora', serif",
         },
@@ -1009,23 +1062,17 @@ var sectorOption = {
             fontFamily : "'Lora', serif",
         }
     },
-    tooltip : {
-        trigger: 'axis',
+       tooltip : {
+        trigger: 'item',
+		formatter : function (params) {
+            var value = (params.value);
+            return params.name + '<br/>' + value;
+        },
         axisPointer : { 
             type : 'shadow'
         },
     },
-    toolbox: {
-        show : false,
-        feature : {
-            mark : {show: true},
-            dataView : {show: true, readOnly: false},
-            magicType: {show: true, type: ['line', 'bar']},
-            restore : {show: true},
-            saveAsImage : {show: true}
-        }
-    },
-    calculable : true,
+  
     xAxis : [
         {
             type : 'value',
@@ -1034,7 +1081,17 @@ var sectorOption = {
                 textStyle : {
                     fontFamily : "'Lora', serif",
                 }
+            },
+			
+            axisLine : {
+                lineStyle : {
+                    color : 'dimgray'
+                }
+            },
+            axisTick : {
+                show : false
             }
+            
         }
     ],
     yAxis : [
@@ -1045,7 +1102,16 @@ var sectorOption = {
                 textStyle : {
                     fontFamily : "'Lora', serif",
                 }
+            },
+            axisLine : {
+                lineStyle : {
+                    color : 'dimgray'
+                }
+            },
+            axisTick : {
+                show : false
             }
+			
        }
     ],
     grid : {
@@ -1056,13 +1122,14 @@ var sectorOption = {
         {
             type:'bar',
             data:[0,8,18,20,36,48,71],
+			
             itemStyle: {
                 normal:{color:'darkred'}
             },
         }
     ]
 };
-
+/*
 var institutionOption = {
     title : {
         text: 'Kasus Korupsi Berdasarkan Instansi',
@@ -1127,7 +1194,7 @@ var institutionOption = {
             },
         }
     ]
-};
+};*/
 require(
     [
         'echarts',
@@ -1145,13 +1212,13 @@ require(
         var mapChart = ec.init(document.getElementById('map'));
         mapChart.setOption(mapOption);
 
-        var modusChart = ec.init(document.getElementById('modus-chart'));
-        modusChart.setOption(modusOption);
+        var topfiveChart = ec.init(document.getElementById('topfive-chart'));
+        topfiveChart.setOption(topfiveOption);
 
-        var sectorChart = ec.init(document.getElementById('sector-chart'));
-        sectorChart.setOption(sectorOption);
-
+        var pulauChart = ec.init(document.getElementById('pulau-chart'));
+        pulauChart.setOption(pulauOption);
+/*
         var institutionChart = ec.init(document.getElementById('institution-chart'));
-        institutionChart.setOption(institutionOption);
+        institutionChart.setOption(institutionOption);*/
     }
 );

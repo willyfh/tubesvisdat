@@ -8,9 +8,13 @@ h1 {
 }
 
 b {
-	color: #7a161a;
+	color: #b20e10;
 }
-
+.container {
+	background-color:#fcfcfc;
+	padding-left:20px;
+	padding-right:20px;
+}
 .header {
 text-align:center;
 }
