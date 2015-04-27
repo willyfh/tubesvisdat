@@ -10,6 +10,10 @@ h1 {
 b {
 	color: #b20e10;
 }
+.col-md-12 {
+	padding-left:10px;
+	padding-right:10px;
+}
 .container {
 	background-color:#fcfcfc;
 	padding-left:20px;
