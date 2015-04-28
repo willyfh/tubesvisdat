@@ -967,7 +967,7 @@ var mapOption = {
 
 var topfiveOption = {
     title : {
-        text: '5 Kasus Gempa Berskala Tertinggi',
+        text: 'Lima Kasus Gempa Terbesar',
         subtext: 'Tahun 2014',
         textStyle : {
             fontFamily : "'Lora', serif",
