@@ -1,8 +1,8 @@
-require.config({
+/*require.config({
     packages: [
         {
             name: 'echarts',
-            location: '//ecomfe.github.io/echarts/src',
+            location: 'https://cdn.rawgit.com/ecomfe/echarts/master/src',
             main: 'echarts'
         },
         {
@@ -11,109 +11,8 @@ require.config({
             main: 'zrender'
         }
     ]
-});
-
-var mapOption = {
-    title : {
-        text: '',
-        subtext: 'sumber data : http://geospasial.bnpb.go.id/pantauanbencana/data/datagempaall.php',
-	
-        x:'left',
-        y:'bottom',
-        subtextStyle : {
-            fontFamily : "'Lora', serif",
-			color :'#333'
-        }
-    },
-	    // legend: {
-        // orient: 'vertical',
-        // x:'left',
-        // data:['Gempa']
-   // },
-    tooltip : {
-        trigger: 'item',
-        showDelay: 0,
-        transitionDuration: 0.2,
-	
-        formatter : function (params) {
-            var value = (params.value + ' SR');
-			if (params.value=='-'){
-				return '-';
-			}else{
-				return "Lokasi : "+params.name + '<br/>Magnitude : ' + value;
-			}
-        }
-    },/*
-	roamController: {
-		show:true,
-		orient:'vertica',
-		 x : 'right',
-        y : 'bottom',
-		mapTypeControl:{
-			USA:true
-		},
-	},*/
-    dataRange: {
-	    
-        x : 'right',
-        y : 'top',
-        min: 4.0,
-        max: 8.0,
-		precision:1,
-		formatter : function(v, v2){
-            return v + " SR - "+v2+" SR"
-        },
-		
-		selectedMode:true,
-		hoverLink : true,
-		realtime : true,
-		splitNumber : 4,
-        color: ['darkred','red','orange','yellow'],
-
-       //text:['8.0 SR','4.0 SR'],
-		
-        calculable : false,
-        textStyle : {
-            fontFamily : "'Lora', serif",
-        }
-    },
-    toolbox: {
-        show : false,
-        orient : 'vertical',
-        x: 'right',
-        y: 'top',
-        feature : {
-            mark : {show: true},
-            dataView : {show: true, readOnly: false},
-            restore : {show: true},
-            saveAsImage : {show: true}
-        }
-    },
-    series : [
-        {
-            name: '',
-            type: 'map',
-            hoverable: false,
-            roam: true,
-            mapType: 'USA',
-			markPoint : {
-                symbolSize: 5,       // 标注大小，半宽（半径）参数，当图形为方向或菱形则总宽度为symbolSize * 2
-                itemStyle: {
-                    normal: {
-                        borderColor: '#333',
-                        borderWidth: 1,            // 标注边线线宽，单位px，默认为1
-                        label: {
-                            show: false
-                        }
-                    },
-                    emphasis: {
-                        borderColor: '#333',
-                        borderWidth: 5,
-						
-                       
-                    }
-                },
-				  data : [
+});*/
+var data = [
                    {name:"31 km BaratDaya CIANJUR-JABAR",value:	5.0},
 					{name:"152 km BaratLaut MALUKUTENGGARABRT",value:	5.0},
 					{name:"81 km BaratDaya NABIRE-PAPUA",value:	5.4},
@@ -315,9 +214,8 @@ var mapOption = {
 					{name:"267 km TimurLaut MALUKUBRTDAYA",value:	5.1},
 					{name:"75 km Tenggara PESAWARAN-LAMPUNG",value:	5.1},
 					{name:"92 km BaratLaut PULAUMOROTAI-MALUT",value:	5.2}
-					]
-				},
-				 geoCoord: {
+				];
+var geoCoordMap = {
                "31 km BaratDaya CIANJUR-JABAR":[	107.11,-7.46	],
 				"152 km BaratLaut MALUKUTENGGARABRT":[	131.26,-6.23	],
 				"81 km BaratDaya NABIRE-PAPUA":[	134.89,-3.77	],
@@ -519,448 +417,154 @@ var mapOption = {
 				"267 km TimurLaut MALUKUBRTDAYA":[	128.59,-6.8	],
 				"75 km Tenggara PESAWARAN-LAMPUNG":[	105.24,-6.18	],
 				"92 km BaratLaut PULAUMOROTAI-MALUT":[	128.23,3.15	]
-				},
-				 
-           
-            data:[
-               /* {name:"31 km BaratDaya CIANJUR-JABAR",value:	5.0},
-					{name:"152 km BaratLaut MALUKUTENGGARABRT",value:	5.0},
-					{name:"81 km BaratDaya NABIRE-PAPUA",value:	5.4},
-					{name:"237 km BaratLaut MALUKUTENGGARABRT",value:	5.3},
-					{name:"132 km BaratLaut HALMAHERABARAT-MALUT",value:	6.1},
-					{name:"117 km BaratLaut HALMAHERABARAT-MALUT",value:	5.0},
-					{name:"133 km BaratLaut HALMAHERABARAT-MALUT",value:	5.1},
-					{name:"138 km BaratLaut HALMAHERABARAT-MALUT",value:	5.0},
-					{name:"272 km BaratLaut KOTA-SABANG-ACEH",value:	5.3},
-					{name:"124 km Tenggara KAIMANA-PAPUABRT",value:	5.2},
-					{name:"90 km BaratLaut DONGGALA-SULTENG",value:	5.0},
-					{name:"192 km Tenggara KEP-MENTAWAI-SUMBAR",value:	5.8},
-					{name:"46 km BaratLaut KAB-SIMEULUE-ACEH",value:	5.1},
-					{name:"70 km BaratLaut KEP-TALAUD-SULUT",value:	5.0},
-					{name:"71 km Tenggara KEP-TALAUD-SULUT",value:	5.1},
-					{name:"130 km TimurLaut BITUNG-SULUT",value:	5.7},
-					{name:"84 km BaratLaut HALMAHERABARAT-MALUT",value:	5.1},
-					{name:"142 km BaratLaut HALMAHERABARAT-MALUT",value:	5.2},
-					{name:"6 km BaratDaya SARMI-PAPUA",value:	5.2},
-					{name:"16 km BaratLaut KAB-JAYAPURA-PAPUA",value:	5.1},
-					{name:"165 km BaratLaut MALUKUTENGGARABRT",value:	6.0},
-					{name:"150 km Tenggara KEP-TALAUD-SULUT",value:	5.2},
-					{name:"244 km TimurLaut MALUKUBRTDAYA",value:	5.2},
-					{name:"122 km BaratLaut HALMAHERABARAT-MALUT",value:	5.3},
-					{name:"64 km TimurLaut KONAWEUTARA-SULTRA",value:	5.7},
-					{name:"65 km TimurLaut KONAWEUTARA-SULTRA",value:	5.1},
-					{name:"135 km BaratLaut HALMAHERABARAT-MALUT",value:	5.5},
-					{name:"137 km BaratLaut HALMAHERABARAT-MALUT",value:	5.0},
-					{name:"137 km TimurLaut BUOL-SULTENG",value:	5.1},
-					{name:"135 km BaratLaut HALMAHERABARAT-MALUT",value:	6.8},
-					{name:"128 km BaratLaut HALMAHERABARAT-MALUT",value:	5.0},
-					{name:"127 km BaratLaut HALMAHERABARAT-MALUT",value:	5.2},
-					{name:"126 km BaratLaut HALMAHERABARAT-MALUT",value:	5.4},
-					{name:"118 km BaratLaut HALMAHERABARAT-MALUT",value:	5.0},
-					{name:"19 km BaratLaut KAB-SIMEULUE-ACEH",value:	5.2},
-					{name:"115 km BaratLaut HALMAHERABARAT-MALUT",value:	6.7},
-					{name:"108 km BaratLaut MALUKUTENGGARABRT",value:	5.3},
-					{name:"202 km BaratLaut KOTA-SABANG-ACEH`",value:	5.5},
-					{name:"140 km BaratLaut HALMAHERABARAT-MALUT",value:	5.8},
-					{name:"58 km TimurLaut BANGGAIKEP-SULTENG",value:	5.0},
-					{name:"37 km TimurLaut GUNUNGSITOLI-SUMUT",value:	5.3},
-					{name:"132 km \nBaratLaut \nHALMAHERABARAT-\nMALUT",value:	7.3},
-					{name:"137 km BaratLaut HALMAHERABARAT-MALUT",value:	7.3},
-					{name:"133 km BaratLaut HALMAHERABARAT-MALUT",value:	5.0},
-					{name:"93 km Tenggara BOLAANGMONGONDOWSEL-SULUT",value:	6.3},
-					{name:"133 km TimurLaut BITUNG-SULUT",value:	5.0},
-					{name:"127 km BaratLaut HALMAHERABARAT-MALUT",value:	5.1},
-					{name:"133 km BaratLaut HALMAHERABARAT-MALUT",value:	5.3},
-					{name:"125 km BaratLaut HALMAHERABARAT-MALUT",value:	5.3},
-					{name:"212 km BaratLaut MALUKUTENGGARABRT",value:	5.2},
-					{name:"151 km BaratDaya TANGGAMUS-LAMPUNG",value:	5.0},
-					{name:"80 km BaratLaut KEP-TALAUD-SULUT",value:	5.1},
-					{name:"101 km BaratDaya KAB-ACEHJAYA",value:	5.6},
-					{name:"58 km BaratDaya BOLAANGMONGONDOWSEL-SULUT",value:	5.3},
-					{name:"75 km BaratDaya SELUMA-BENGKULU",value:	5.0},
-					{name:"162 km BaratLaut MALUKUTENGGARABRT",value:	5.0},
-					{name:"125 km BaratLaut BIMA-NTB",value:	6.0},
-					{name:"200 km Tenggara KAB-MALANG-JATIM",value:	5.1},
-					{name:"132 km BaratLaut HALMAHERABARAT-MALUT",value:	5.2},
-					{name:"57 km BaratLaut HALMAHERABARAT-MALUT",value:	5.2},
-					{name:"180 km BaratLaut KEP-TALAUD-SULUT",value:	5.1},
-					{name:"84 km BaratDaya PANDEGLANG-BANTEN",value:	5.0},
-					{name:"166 km TimurLaut PULAUMOROTAI-MALUT",value:	5.0},
-					{name:"73 km BaratDaya LAMPUNGBARAT",value:	5.2},
-					{name:"18 km TimurLaut KOTA-SUKABUMI-JABAR",value:	5.5},
-					{name:"44 km BaratLaut SERAMBAGIANBARAT-MALUKU",value:	5.1},
-					{name:"46 km BaratLaut NIASBARAT-SUMUT",value:	5.2},
-					{name:"256 km BaratDaya KAB-ACEHJAYA",value:	5.0},
-					{name:"189 km BaratLaut MALUKUTENGGARABRT",value:	5.3},
-					{name:"13 km BaratDaya NABIRE-PAPUA",value:	5.0},
-					{name:"176 km BaratLaut MALUKUTENGGARABRT",value:	5.1},
-					{name:"96 km BaratLaut PANDEGLANG-BANTEN",value:	5.2},
-					{name:"31 km BaratDaya KEP-TALAUD-SULUT",value:	5.2},
-					{name:"176 km BaratLaut MALUKUTENGGARABRT",value:	5.0},
-					{name:"19 km BaratDaya MAYBRAT-PAPUABRT",value:	5.4},
-					{name:"127 km BaratLaut MALUKUTENGGARABRT",value:	5.1},
-					{name:"137 km BaratLaut TUAL-MALUKU",value:	5.0},
-					{name:"257 km TimurLaut MALUKUBRTDAYA",value:	5.0},
-					{name:"101 km BaratLaut YALIMO-PAPUA",value:	5.1},
-					{name:"49 km BaratDaya KEP-TALAUD-SULUT",value:	5.1},
-					{name:"119 km BaratDaya PESAWARAN-LAMPUNG",value:	5.1},
-					{name:"158 km BaratLaut MALUKUTENGGARABRT",value:	5.0},
-					{name:"83 km BaratDaya PACITAN-JATIM",value:	5.0},
-					{name:"67 km TimurLaut DONGGALA-SULTENG",value:	5.1},
-					{name:"154 km TimurLaut TELUKBINTUNI-PAPUABRT",value:	5.1},
-					{name:"237 km BaratDaya SERAMBAGIANBARAT-MALUKU",value:	5.1},
-					{name:"228 km TimurLaut MALUKUBRTDAYA",value:	5.2},
-					{name:"55 km BaratDaya BENGKULUSELATAN",value:	5.0},
-					{name:"31 km BaratDaya NIASUTARA-SUMUT",value:	5.6},
-					{name:"25 km BaratDaya NIASUTARA-SUMUT",value:	5.2},
-					{name:"50 km BaratDaya SELUMA-BENGKULU",value:	5.0},
-					{name:"128 km Tenggara BOLAANGMONGONDOWTMR-SULUT",value:	5.0},
-					{name:"53 km BaratDaya BOLAANGMONGONDOWSEL-SULUT",value:	5.0},
-					{name:"57 km TimurLaut SARMI-PAPUA",value:	5.0},
-					{name:"325 km BaratLaut KOTA-SABANG-NAD",value:	5.2},
-					{name:"439 km BaratLaut KOTA-SABANG-NAD",value:	5.2},
-					{name:"62 km TimurLaut MALUKUTENGAH",value:	5.0},
-					{name:"14 km BaratDaya TANAHDATAR-SUMBAR",value:	5.0},
-					{name:"131 km Tenggara BOLAANGMONGONDOWTMR-SULUT",value:	6.2},
-					{name:"139 km Tenggara BOLAANGMONGONDOWTMR-SULUT",value:	5.7},
-					{name:"138 km Tenggara BOLAANGMONGONDOWTMR-SULUT",value:	5.3},
-					{name:"117 km BaratDaya SUMBABARATDAYA-NTT",value:	5.0},
-					{name:"32 km BaratDaya PADANGLAWAS-SUMUT",value:	5.0},
-					{name:"154 km BaratDaya KAB-MALANG-JATIM",value:	5.0},
-					{name:"238 km TimurLaut MALUKUBRTDAYA",value:	5.4},
-					{name:"192 km BaratLaut MALUKUTENGGARABRT",value:	5.0},
-					{name:"399 km BaratLaut KAB-SIMEULUE-NAD",value:	5.1},
-					{name:"60 km TimurLaut SIAUTAGULANDANGBIARO-SULUT",value:	5.1},
-					{name:"45 km BaratLaut PUNCAKJAYA-PAPUA",value:	5.0},
-					{name:"73 km BaratLaut PULAUMOROTAI-MALUT",value:	5.0},
-					{name:"119 km BaratLaut MALUKUBRTDAYA",value:	5.4},
-					{name:"124 km Tenggara NIASSELATAN-SUMUT",value:	5.0},
-					{name:"52 km BaratDaya WAROPEN-PAPUA",value:	5.0},
-					{name:"74 km TimurLaut KEP-TALAUD-SULUT",value:	5.1},
-					{name:"46 km BaratLaut KEP-TALAUD-SULUT",value:	5.4},
-					{name:"200 km TimurLaut MALUKUBRTDAYA",value:	6.2},
-					{name:"97 km BaratDaya KOTA-SABANG-NAD",value:	5.0},
-					{name:"96 km Tenggara NIASSELATAN-SUMUT",value:	5.0},
-					{name:"53 km BaratDaya MUKOMUKO-BENGKULU",value:	5.1},
-					{name:"28 km TimurLaut KAB-ACEHBARAT",value:	5.1},
-					{name:"50 km Tenggara WAROPEN-PAPUA",value:	5.0},
-					{name:"115 km Tenggara KAB-MALANG-JATIM",value:	5.0},
-					{name:"110 km BaratDaya TRENGGALEK-JATIM",value:	5.3},
-					{name:"527 km BaratDaya KOTA-SABANG-NAD",value:	5.0},
-					{name:"54 km TimurLaut MALUKUBRTDAYA",value:	5.0},
-					{name:"76 km BaratDaya KEEROM-PAPUA",value:	5.4},
-					{name:"17 km BaratLaut DONGGALA-SULTENG",value:	5.3},
-					{name:"104 km Tenggara PACITAN-JATIM",value:	5.6},
-					{name:"92 km BaratDaya PANDEGLANG-BANTEN",value:	5.6},
-					{name:"126 km BaratLaut TUAL-MALUKU",value:	5.5},
-					{name:"156 km BaratLaut MALUKUTENGGARABRT",value:	5.3},
-					{name:"110 km TimurLaut LEMBATA-NTT",value:	5.4},
-					{name:"91 km BaratLaut NIASUTARA-SUMUT",value:	5.9},
-					{name:"17 km Tenggara YALIMO-PAPUA",value:	5.4},
-					{name:"9 km BaratLaut YALIMO-PAPUA",value:	5.1},
-					{name:"91 km Tenggara BOLAANGMONGONDOWTMR-SULUT",value:	5.2},
-					{name:"63 km BaratLaut KEP-MENTAWAI-SUMBAR",value:	5.0},
-					{name:"125 km BaratLaut TERNATE-MALUT",value:	5.0},
-					{name:"128 km BaratDaya SUMBABARATDAYA-NTT",value:	5.4},
-					{name:"59 km Tenggara BONEBOLANGO-GORONTALO",value:	5.2},
-					{name:"67 km BaratLaut YALIMO-PAPUA",value:	5.3},
-					{name:"81 km Tenggara KAB-GORONTALO",value:	5.9},
-					{name:"75 km BaratDaya KAB-TASIKMALAYA-JABAR",value:	5.5},
-					{name:"103 km BaratLaut PULAUMOROTAI-MALUT",value:	5.1},
-					{name:"40 km TimurLaut LEBONG-BENGKULU",value:	5.2},
-					{name:"42 km Tenggara BITUNG-SULUT",value:	5.2},
-					{name:"187 km BaratLaut RAJAAMPAT-PAPUABRT",value:	5.2},
-					{name:"223 km BaratLaut MALUKUTENGGARABRT",value:	5.1},
-					{name:"97 km BaratDaya KEBUMEN-JATENG",value:	5.0},
-					{name:"53 km TimurLaut SIAUTAGULANDANGBIARO-SULUT",value:	5.0},
-					{name:"634 km BaratDaya KAB-SIMEULUE-NAD",value:	5.9},
-					{name:"91 km BaratDaya LEBAK-BANTEN",value:	5.1},
-					{name:"54 km BaratLaut MANGGARAIBRT-NTT",value:	5.3},
-					{name:"61 km BaratLaut SIKKA-NTT",value:	5.2},
-					{name:"155 km Tenggara SIAUTAGULANDANGBIARO-SULUT",value:	5.1},
-					{name:"234 km TimurLaut MALUKUBRTDAYA",value:	5.0},
-					{name:"138 km BaratDaya LAMPUNGBARAT",value:	5.0},
-					{name:"263 km BaratDaya LAMPUNGBARAT",value:	5.0},
-					{name:"254 km BaratDaya LAMPUNGBARAT",value:	5.0},
-					{name:"55 km BaratLaut SERAMBAGIANBARAT-MALUKU",value:	5.4},
-					{name:"342 km BaratDaya KAB-ACEHJAYA",value:	6.4},
-					{name:"242 km BaratLaut KAB-SIMEULUE-NAD",value:	5.2},
-					{name:"170 km BaratDaya KAUR-BENGKULU",value:	5.1},
-					{name:"39 km TimurLaut SUMBAWA-NTB",value:	5.7},
-					{name:"16 km BaratDaya KEP-TALAUD-SULUT",value:	5.4},
-					{name:"65 km BaratDaya KAB-ACEHSINGKIL",value:	5.4},
-					{name:"88 km TimurLaut BURUSELATAN-MALUKU",value:	5.7},
-					{name:"67 km BaratDaya KAB-ACEHSINGKIL",value:	5.7},
-					{name:"137 km BaratLaut MALUKUTENGGARABRT",value:	5.0},
-					{name:"59 km TimurLaut MALUKUTENGGARABRT",value:	5.2},
-					{name:"181 km BaratDaya BENGKULUSELATAN",value:	5.7},
-					{name:"191 km BaratDaya LAMPUNGBARAT",value:	5.0},
-					{name:"32 km BaratDaya OGANKOMRNGULUSEL-SUMSEL",value:	5.4},
-					{name:"60 km TimurLaut TAMBRAUW-PAPUABRT",value:	5.1},
-					{name:"27 km BaratLaut ALOR-NTT",value:	5.3},
-					{name:"252 km BaratLaut MALUKUTENGGARABRT",value:	5.0},
-					{name:"274 km Tenggara MALUKUBRTDAYA",value:	5.8},
-					{name:"224 km TimurLaut MALUKUBRTDAYA",value:	5.8},
-					{name:"215 km TimurLaut MALUKUBRTDAYA",value:	5.0},
-					{name:"218 km TimurLaut MALUKUBRTDAYA",value:	5.0},
-					{name:"162 km TimurLaut KEP-SULA-MALUT",value:	5.1},
-					{name:"114 km Tenggara KAIMANA-PAPUABRT",value:	5.0},
-					{name:"68 km BaratDaya KEBUMEN-JATENG",value:	5.3},
-					{name:"203 km BaratLaut KEP-SANGIHE-SULUT",value:	5.1},
-					{name:"104 km BaratDaya KEBUMEN-JATENG",value:	6.5},
-					{name:"117 km BaratLaut MALUKUTENGGARABRT",value:	5.4},
-					{name:"126 km BaratDaya KEP-SELAYAR-SULSEL",value:	5.3},
-					{name:"219 km BaratDaya MALUKUTENGGARABRT",value:	5.3},
-					{name:"30 km BaratDaya KAB-ACEHBESAR",value:	4.2},
-					{name:"52 km TimurLaut MALUKUTENGAH",value:	5.0},
-					{name:"64 km BaratDaya KAUR-BENGKULU",value:	5.2},
-					{name:"127 km BaratLaut TERNATE-MALUT",value:	5.0},
-					{name:"30 km BaratLaut KAB-SUKABUMI-JABAR",value:	5.1},
-					{name:"226 km BaratDaya KAB-SIMEULUE-NAD",value:	5.2},
-					{name:"27 km BaratDaya BANGGAIKEP-SULTENG",value:	5.0},
-					{name:"132 km BaratDaya NIASSELATAN-SUMUT",value:	5.1},
-					{name:"57 km BaratDaya TELUKWONDAMA-PAPUABRT",value:	5.0},
-					{name:"72 km BaratDaya PANDEGLANG-BANTEN",value:	5.2},
-					{name:"267 km TimurLaut MALUKUBRTDAYA",value:	5.1},
-					{name:"75 km Tenggara PESAWARAN-LAMPUNG",value:	5.1},
-					{name:"92 km BaratLaut PULAUMOROTAI-MALUT",value:	5.2}*/
-            ]
-        },   {
-            name: '',
-            type: 'map',
-            mapType: 'USA',
-            data:[],
-            markPoint : {
-                symbol:'emptyCircle',
-                symbolSize : function (v){
-					if(v > 7) {
-						return (v*v)
-					} else if(v>6) {
-						return ((v*v)/2)
+				};
+
+var convertData = function (data) {
+    var res = [];
+    for (var i = 0; i < data.length; i++) {
+        var geoCoord = geoCoordMap[data[i].name];
+        if (geoCoord) {
+            res.push({
+                name: data[i].name,
+                value: geoCoord.concat(data[i].value)
+            });
+        }
+    }
+    return res;
+};
+
+var mapOption = {
+    backgroundColor: '#404a59',
+    title : {
+        text: '',
+        subtextStyle : {
+            fontFamily : "'Lora', serif",
+			color :'#333'
+        }
+    },
+    tooltip : {
+        trigger: 'item',
+        showDelay: 0,
+        transitionDuration: 0.2,
+	
+        formatter : function (params) {
+            var value = (params.value[2] + ' SR');
+			if (params.value=='-'){
+				return '-';
+			}else{
+				return "Lokasi : "+params.name + '<br/>Magnitude : ' + value;
+			}
+        }
+    },
+    dataRange: {
+	    
+        x : 'right',
+        y : 'top',
+        min: 4.0,
+        max: 8.0,
+		precision:1,
+		formatter : function(v, v2){
+            return v + " SR - "+v2+" SR"
+        },
+		
+		selectedMode:true,
+		hoverLink : true,
+		realtime : true,
+		splitNumber : 4,
+        color: ['darkred','red','orange','yellow'],
+
+       //text:['8.0 SR','4.0 SR'],
+		
+        calculable : false,
+        textStyle : {
+            fontFamily : "'Lora', serif",
+        }
+    },
+    geo: {
+        map: 'INDONESIA',
+        label: {
+            emphasis: {
+                show: false
+            }
+        },
+        roam: false,
+        itemStyle: {
+            normal: {
+                areaColor: '#323c48',
+                borderColor: '#111'
+            },
+            emphasis: {
+                areaColor: '#2a333d'
+            }
+        }
+    },
+    series : [
+        {
+            name: 'pm2.5',
+            type: 'scatter',
+            coordinateSystem: 'geo',
+            data: convertData(data),
+            symbolSize: function (v){
+					if(v[2] > 7) {
+						return (v[2]*v[2])
+					} else if(v[2]>6) {
+						return ((v[2]*v[2])/2)
 					}else {
-						return ((v*v)/4)
+						return ((v[2]*v[2])/4)
 					}
                 },
-				
-                effect : {
-                    show: true,
-                    shadowBlur : 0
+            label: {
+                normal: {
+                    formatter: '{b}',
+                    position: 'right',
+                    show: false
                 },
-                itemStyle:{
-                    normal:{
-                        label:{show:false}
-                    },emphasis: {
-                        
-                        borderWidth:0,
-                        label: {
-                            show: false
-                        }
-                    },
-                },
-                data : [
-                   {name:"31 km BaratDaya CIANJUR-JABAR",value:	5.0},
-					{name:"152 km BaratLaut MALUKUTENGGARABRT",value:	5.0},
-					{name:"81 km BaratDaya NABIRE-PAPUA",value:	5.4},
-					{name:"237 km BaratLaut MALUKUTENGGARABRT",value:	5.3},
-					{name:"132 km BaratLaut HALMAHERABARAT-MALUT",value:	6.1},
-					{name:"117 km BaratLaut HALMAHERABARAT-MALUT",value:	5.0},
-					{name:"133 km BaratLaut HALMAHERABARAT-MALUT",value:	5.1},
-					{name:"138 km BaratLaut HALMAHERABARAT-MALUT",value:	5.0},
-					{name:"272 km BaratLaut KOTA-SABANG-ACEH",value:	5.3},
-					{name:"124 km Tenggara KAIMANA-PAPUABRT",value:	5.2},
-					{name:"90 km BaratLaut DONGGALA-SULTENG",value:	5.0},
-					{name:"192 km Tenggara KEP-MENTAWAI-SUMBAR",value:	5.8},
-					{name:"46 km BaratLaut KAB-SIMEULUE-ACEH",value:	5.1},
-					{name:"70 km BaratLaut KEP-TALAUD-SULUT",value:	5.0},
-					{name:"71 km Tenggara KEP-TALAUD-SULUT",value:	5.1},
-					{name:"130 km TimurLaut BITUNG-SULUT",value:	5.7},
-					{name:"84 km BaratLaut HALMAHERABARAT-MALUT",value:	5.1},
-					{name:"142 km BaratLaut HALMAHERABARAT-MALUT",value:	5.2},
-					{name:"6 km BaratDaya SARMI-PAPUA",value:	5.2},
-					{name:"16 km BaratLaut KAB-JAYAPURA-PAPUA",value:	5.1},
-					{name:"165 km BaratLaut MALUKUTENGGARABRT",value:	6.0},
-					{name:"150 km Tenggara KEP-TALAUD-SULUT",value:	5.2},
-					{name:"244 km TimurLaut MALUKUBRTDAYA",value:	5.2},
-					{name:"122 km BaratLaut HALMAHERABARAT-MALUT",value:	5.3},
-					{name:"64 km TimurLaut KONAWEUTARA-SULTRA",value:	5.7},
-					{name:"65 km TimurLaut KONAWEUTARA-SULTRA",value:	5.1},
-					{name:"135 km BaratLaut HALMAHERABARAT-MALUT",value:	5.5},
-					{name:"137 km BaratLaut HALMAHERABARAT-MALUT",value:	5.0},
-					{name:"137 km TimurLaut BUOL-SULTENG",value:	5.1},
-					{name:"135 km BaratLaut HALMAHERABARAT-MALUT",value:	6.8},
-					{name:"128 km BaratLaut HALMAHERABARAT-MALUT",value:	5.0},
-					{name:"127 km BaratLaut HALMAHERABARAT-MALUT",value:	5.2},
-					{name:"126 km BaratLaut HALMAHERABARAT-MALUT",value:	5.4},
-					{name:"118 km BaratLaut HALMAHERABARAT-MALUT",value:	5.0},
-					{name:"19 km BaratLaut KAB-SIMEULUE-ACEH",value:	5.2},
-					{name:"115 km BaratLaut HALMAHERABARAT-MALUT",value:	6.7},
-					{name:"108 km BaratLaut MALUKUTENGGARABRT",value:	5.3},
-					{name:"202 km BaratLaut KOTA-SABANG-ACEH`",value:	5.5},
-					{name:"140 km BaratLaut HALMAHERABARAT-MALUT",value:	5.8},
-					{name:"58 km TimurLaut BANGGAIKEP-SULTENG",value:	5.0},
-					{name:"37 km TimurLaut GUNUNGSITOLI-SUMUT",value:	5.3},
-					{name:"132 km BaratLaut HALMAHERABARAT-MALUT",value:	7.3},
-					{name:"137 km BaratLaut HALMAHERABARAT-MALUT",value:	7.3},
-					{name:"133 km BaratLaut HALMAHERABARAT-MALUT",value:	5.0},
-					{name:"93 km Tenggara BOLAANGMONGONDOWSEL-SULUT",value:	6.3},
-					{name:"133 km TimurLaut BITUNG-SULUT",value:	5.0},
-					{name:"127 km BaratLaut HALMAHERABARAT-MALUT",value:	5.1},
-					{name:"133 km BaratLaut HALMAHERABARAT-MALUT",value:	5.3},
-					{name:"125 km BaratLaut HALMAHERABARAT-MALUT",value:	5.3},
-					{name:"212 km BaratLaut MALUKUTENGGARABRT",value:	5.2},
-					{name:"151 km BaratDaya TANGGAMUS-LAMPUNG",value:	5.0},
-					{name:"80 km BaratLaut KEP-TALAUD-SULUT",value:	5.1},
-					{name:"101 km BaratDaya KAB-ACEHJAYA",value:	5.6},
-					{name:"58 km BaratDaya BOLAANGMONGONDOWSEL-SULUT",value:	5.3},
-					{name:"75 km BaratDaya SELUMA-BENGKULU",value:	5.0},
-					{name:"162 km BaratLaut MALUKUTENGGARABRT",value:	5.0},
-					{name:"125 km BaratLaut BIMA-NTB",value:	6.0},
-					{name:"200 km Tenggara KAB-MALANG-JATIM",value:	5.1},
-					{name:"132 km BaratLaut HALMAHERABARAT-MALUT",value:	5.2},
-					{name:"57 km BaratLaut HALMAHERABARAT-MALUT",value:	5.2},
-					{name:"180 km BaratLaut KEP-TALAUD-SULUT",value:	5.1},
-					{name:"84 km BaratDaya PANDEGLANG-BANTEN",value:	5.0},
-					{name:"166 km TimurLaut PULAUMOROTAI-MALUT",value:	5.0},
-					{name:"73 km BaratDaya LAMPUNGBARAT",value:	5.2},
-					{name:"18 km TimurLaut KOTA-SUKABUMI-JABAR",value:	5.5},
-					{name:"44 km BaratLaut SERAMBAGIANBARAT-MALUKU",value:	5.1},
-					{name:"46 km BaratLaut NIASBARAT-SUMUT",value:	5.2},
-					{name:"256 km BaratDaya KAB-ACEHJAYA",value:	5.0},
-					{name:"189 km BaratLaut MALUKUTENGGARABRT",value:	5.3},
-					{name:"13 km BaratDaya NABIRE-PAPUA",value:	5.0},
-					{name:"176 km BaratLaut MALUKUTENGGARABRT",value:	5.1},
-					{name:"96 km BaratLaut PANDEGLANG-BANTEN",value:	5.2},
-					{name:"31 km BaratDaya KEP-TALAUD-SULUT",value:	5.2},
-					{name:"176 km BaratLaut MALUKUTENGGARABRT",value:	5.0},
-					{name:"19 km BaratDaya MAYBRAT-PAPUABRT",value:	5.4},
-					{name:"127 km BaratLaut MALUKUTENGGARABRT",value:	5.1},
-					{name:"137 km BaratLaut TUAL-MALUKU",value:	5.0},
-					{name:"257 km TimurLaut MALUKUBRTDAYA",value:	5.0},
-					{name:"101 km BaratLaut YALIMO-PAPUA",value:	5.1},
-					{name:"49 km BaratDaya KEP-TALAUD-SULUT",value:	5.1},
-					{name:"119 km BaratDaya PESAWARAN-LAMPUNG",value:	5.1},
-					{name:"158 km BaratLaut MALUKUTENGGARABRT",value:	5.0},
-					{name:"83 km BaratDaya PACITAN-JATIM",value:	5.0},
-					{name:"67 km TimurLaut DONGGALA-SULTENG",value:	5.1},
-					{name:"154 km TimurLaut TELUKBINTUNI-PAPUABRT",value:	5.1},
-					{name:"237 km BaratDaya SERAMBAGIANBARAT-MALUKU",value:	5.1},
-					{name:"228 km TimurLaut MALUKUBRTDAYA",value:	5.2},
-					{name:"55 km BaratDaya BENGKULUSELATAN",value:	5.0},
-					{name:"31 km BaratDaya NIASUTARA-SUMUT",value:	5.6},
-					{name:"25 km BaratDaya NIASUTARA-SUMUT",value:	5.2},
-					{name:"50 km BaratDaya SELUMA-BENGKULU",value:	5.0},
-					{name:"128 km Tenggara BOLAANGMONGONDOWTMR-SULUT",value:	5.0},
-					{name:"53 km BaratDaya BOLAANGMONGONDOWSEL-SULUT",value:	5.0},
-					{name:"57 km TimurLaut SARMI-PAPUA",value:	5.0},
-					{name:"325 km BaratLaut KOTA-SABANG-NAD",value:	5.2},
-					{name:"439 km BaratLaut KOTA-SABANG-NAD",value:	5.2},
-					{name:"62 km TimurLaut MALUKUTENGAH",value:	5.0},
-					{name:"14 km BaratDaya TANAHDATAR-SUMBAR",value:	5.0},
-					{name:"131 km Tenggara BOLAANGMONGONDOWTMR-SULUT",value:	6.2},
-					{name:"139 km Tenggara BOLAANGMONGONDOWTMR-SULUT",value:	5.7},
-					{name:"138 km Tenggara BOLAANGMONGONDOWTMR-SULUT",value:	5.3},
-					{name:"117 km BaratDaya SUMBABARATDAYA-NTT",value:	5.0},
-					{name:"32 km BaratDaya PADANGLAWAS-SUMUT",value:	5.0},
-					{name:"154 km BaratDaya KAB-MALANG-JATIM",value:	5.0},
-					{name:"238 km TimurLaut MALUKUBRTDAYA",value:	5.4},
-					{name:"192 km BaratLaut MALUKUTENGGARABRT",value:	5.0},
-					{name:"399 km BaratLaut KAB-SIMEULUE-NAD",value:	5.1},
-					{name:"60 km TimurLaut SIAUTAGULANDANGBIARO-SULUT",value:	5.1},
-					{name:"45 km BaratLaut PUNCAKJAYA-PAPUA",value:	5.0},
-					{name:"73 km BaratLaut PULAUMOROTAI-MALUT",value:	5.0},
-					{name:"119 km BaratLaut MALUKUBRTDAYA",value:	5.4},
-					{name:"124 km Tenggara NIASSELATAN-SUMUT",value:	5.0},
-					{name:"52 km BaratDaya WAROPEN-PAPUA",value:	5.0},
-					{name:"74 km TimurLaut KEP-TALAUD-SULUT",value:	5.1},
-					{name:"46 km BaratLaut KEP-TALAUD-SULUT",value:	5.4},
-					{name:"200 km TimurLaut MALUKUBRTDAYA",value:	6.2},
-					{name:"97 km BaratDaya KOTA-SABANG-NAD",value:	5.0},
-					{name:"96 km Tenggara NIASSELATAN-SUMUT",value:	5.0},
-					{name:"53 km BaratDaya MUKOMUKO-BENGKULU",value:	5.1},
-					{name:"28 km TimurLaut KAB-ACEHBARAT",value:	5.1},
-					{name:"50 km Tenggara WAROPEN-PAPUA",value:	5.0},
-					{name:"115 km Tenggara KAB-MALANG-JATIM",value:	5.0},
-					{name:"110 km BaratDaya TRENGGALEK-JATIM",value:	5.3},
-					{name:"527 km BaratDaya KOTA-SABANG-NAD",value:	5.0},
-					{name:"54 km TimurLaut MALUKUBRTDAYA",value:	5.0},
-					{name:"76 km BaratDaya KEEROM-PAPUA",value:	5.4},
-					{name:"17 km BaratLaut DONGGALA-SULTENG",value:	5.3},
-					{name:"104 km Tenggara PACITAN-JATIM",value:	5.6},
-					{name:"92 km BaratDaya PANDEGLANG-BANTEN",value:	5.6},
-					{name:"126 km BaratLaut TUAL-MALUKU",value:	5.5},
-					{name:"156 km BaratLaut MALUKUTENGGARABRT",value:	5.3},
-					{name:"110 km TimurLaut LEMBATA-NTT",value:	5.4},
-					{name:"91 km BaratLaut NIASUTARA-SUMUT",value:	5.9},
-					{name:"17 km Tenggara YALIMO-PAPUA",value:	5.4},
-					{name:"9 km BaratLaut YALIMO-PAPUA",value:	5.1},
-					{name:"91 km Tenggara BOLAANGMONGONDOWTMR-SULUT",value:	5.2},
-					{name:"63 km BaratLaut KEP-MENTAWAI-SUMBAR",value:	5.0},
-					{name:"125 km BaratLaut TERNATE-MALUT",value:	5.0},
-					{name:"128 km BaratDaya SUMBABARATDAYA-NTT",value:	5.4},
-					{name:"59 km Tenggara BONEBOLANGO-GORONTALO",value:	5.2},
-					{name:"67 km BaratLaut YALIMO-PAPUA",value:	5.3},
-					{name:"81 km Tenggara KAB-GORONTALO",value:	5.9},
-					{name:"75 km BaratDaya KAB-TASIKMALAYA-JABAR",value:	5.5},
-					{name:"103 km BaratLaut PULAUMOROTAI-MALUT",value:	5.1},
-					{name:"40 km TimurLaut LEBONG-BENGKULU",value:	5.2},
-					{name:"42 km Tenggara BITUNG-SULUT",value:	5.2},
-					{name:"187 km BaratLaut RAJAAMPAT-PAPUABRT",value:	5.2},
-					{name:"223 km BaratLaut MALUKUTENGGARABRT",value:	5.1},
-					{name:"97 km BaratDaya KEBUMEN-JATENG",value:	5.0},
-					{name:"53 km TimurLaut SIAUTAGULANDANGBIARO-SULUT",value:	5.0},
-					{name:"634 km BaratDaya KAB-SIMEULUE-NAD",value:	5.9},
-					{name:"91 km BaratDaya LEBAK-BANTEN",value:	5.1},
-					{name:"54 km BaratLaut MANGGARAIBRT-NTT",value:	5.3},
-					{name:"61 km BaratLaut SIKKA-NTT",value:	5.2},
-					{name:"155 km Tenggara SIAUTAGULANDANGBIARO-SULUT",value:	5.1},
-					{name:"234 km TimurLaut MALUKUBRTDAYA",value:	5.0},
-					{name:"138 km BaratDaya LAMPUNGBARAT",value:	5.0},
-					{name:"263 km BaratDaya LAMPUNGBARAT",value:	5.0},
-					{name:"254 km BaratDaya LAMPUNGBARAT",value:	5.0},
-					{name:"55 km BaratLaut SERAMBAGIANBARAT-MALUKU",value:	5.4},
-					{name:"342 km BaratDaya KAB-ACEHJAYA",value:	6.4},
-					{name:"242 km BaratLaut KAB-SIMEULUE-NAD",value:	5.2},
-					{name:"170 km BaratDaya KAUR-BENGKULU",value:	5.1},
-					{name:"39 km TimurLaut SUMBAWA-NTB",value:	5.7},
-					{name:"16 km BaratDaya KEP-TALAUD-SULUT",value:	5.4},
-					{name:"65 km BaratDaya KAB-ACEHSINGKIL",value:	5.4},
-					{name:"88 km TimurLaut BURUSELATAN-MALUKU",value:	5.7},
-					{name:"67 km BaratDaya KAB-ACEHSINGKIL",value:	5.7},
-					{name:"137 km BaratLaut MALUKUTENGGARABRT",value:	5.0},
-					{name:"59 km TimurLaut MALUKUTENGGARABRT",value:	5.2},
-					{name:"181 km BaratDaya BENGKULUSELATAN",value:	5.7},
-					{name:"191 km BaratDaya LAMPUNGBARAT",value:	5.0},
-					{name:"32 km BaratDaya OGANKOMRNGULUSEL-SUMSEL",value:	5.4},
-					{name:"60 km TimurLaut TAMBRAUW-PAPUABRT",value:	5.1},
-					{name:"27 km BaratLaut ALOR-NTT",value:	5.3},
-					{name:"252 km BaratLaut MALUKUTENGGARABRT",value:	5.0},
-					{name:"274 km Tenggara MALUKUBRTDAYA",value:	5.8},
-					{name:"224 km TimurLaut MALUKUBRTDAYA",value:	5.8},
-					{name:"215 km TimurLaut MALUKUBRTDAYA",value:	5.0},
-					{name:"218 km TimurLaut MALUKUBRTDAYA",value:	5.0},
-					{name:"162 km TimurLaut KEP-SULA-MALUT",value:	5.1},
-					{name:"114 km Tenggara KAIMANA-PAPUABRT",value:	5.0},
-					{name:"68 km BaratDaya KEBUMEN-JATENG",value:	5.3},
-					{name:"203 km BaratLaut KEP-SANGIHE-SULUT",value:	5.1},
-					{name:"104 km BaratDaya KEBUMEN-JATENG",value:	6.5},
-					{name:"117 km BaratLaut MALUKUTENGGARABRT",value:	5.4},
-					{name:"126 km BaratDaya KEP-SELAYAR-SULSEL",value:	5.3},
-					{name:"219 km BaratDaya MALUKUTENGGARABRT",value:	5.3},
-					{name:"30 km BaratDaya KAB-ACEHBESAR",value:	4.2},
-					{name:"52 km TimurLaut MALUKUTENGAH",value:	5.0},
-					{name:"64 km BaratDaya KAUR-BENGKULU",value:	5.2},
-					{name:"127 km BaratLaut TERNATE-MALUT",value:	5.0},
-					{name:"30 km BaratLaut KAB-SUKABUMI-JABAR",value:	5.1},
-					{name:"226 km BaratDaya KAB-SIMEULUE-NAD",value:	5.2},
-					{name:"27 km BaratDaya BANGGAIKEP-SULTENG",value:	5.0},
-					{name:"132 km BaratDaya NIASSELATAN-SUMUT",value:	5.1},
-					{name:"57 km BaratDaya TELUKWONDAMA-PAPUABRT",value:	5.0},
-					{name:"72 km BaratDaya PANDEGLANG-BANTEN",value:	5.2},
-					{name:"267 km TimurLaut MALUKUBRTDAYA",value:	5.1},
-					{name:"75 km Tenggara PESAWARAN-LAMPUNG",value:	5.1},
-					{name:"92 km BaratLaut PULAUMOROTAI-MALUT",value:	5.2}
-                ]
+                emphasis: {
+                    show: true
+                }
+            },
+            itemStyle: {
+                normal: {
+                    color: '#ddb926'
+                }
             }
+        },
+        {
+            name: 'Top 5',
+            type: 'effectScatter',
+            coordinateSystem: 'geo',
+            data: convertData(data.sort(function (a, b) {
+                return b.value - a.value;
+            }).slice(0, 6)),
+            symbolSize: function (v){
+					if(v[2] > 7) {
+						return (v[2]*v[2])
+					} else if(v[2]>6) {
+						return ((v[2]*v[2])/2)
+					}else {
+						return ((v[2]*v[2])/4)
+					}
+                },
+            showEffectOn: 'render',
+            rippleEffect: {
+                brushType: 'stroke'
+            },
+            hoverAnimation: true,
+            label: {
+                normal: {
+                    formatter: '{b}',
+                    position: 'right',
+                    show: false
+                }
+            },
+            itemStyle: {
+                normal: {
+                    color: '#f4e925',
+                    shadowBlur: 10,
+                    shadowColor: '#333'
+                }
+            },
+            zlevel: 1
         }
     ]
 };
@@ -1195,30 +799,24 @@ var institutionOption = {
         }
     ]
 };*/
-require(
-    [
-        'echarts',
-        'echarts/chart/map',
-        'echarts/chart/bar'
-    ],
-    function (ec) {
-        require('echarts/util/mapData/params').params.USA = {
-            getGeoJson: function (callback) {
-                $.getJSON('assets/js/geojson.json', callback); // Offline
-                // $.getJSON('//bitbucket.org/rifani/geojson-political-indonesia/raw/0e89dcb0b0454c5afffd414fd0cd0c25f1688d10/IDN_adm_1_province.json', callback); // Online
-            }
-        }
 
-        var mapChart = ec.init(document.getElementById('map'));
-        mapChart.setOption(mapOption);
 
-        var topfiveChart = ec.init(document.getElementById('topfive-chart'));
+		
+		$.get('assets/js/geojson.json', function (geoJson) {
+
+			echarts.registerMap('INDONESIA', geoJson);
+			var mapChart = echarts.init(document.getElementById('map'));
+            mapChart.setOption(mapOption);
+		});
+
+       // var mapChart = ec.init(document.getElementById('map'));
+        //mapChart.setOption(mapOption);
+
+        var topfiveChart = echarts.init(document.getElementById('topfive-chart'));
         topfiveChart.setOption(topfiveOption);
 
-        var pulauChart = ec.init(document.getElementById('pulau-chart'));
+        var pulauChart = echarts.init(document.getElementById('pulau-chart'));
         pulauChart.setOption(pulauOption);
 /*
         var institutionChart = ec.init(document.getElementById('institution-chart'));
         institutionChart.setOption(institutionOption);*/
-    }
-);

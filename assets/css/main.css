@@ -34,12 +34,16 @@ text-align:center;
 }
 
 .main {
-	padding : 0 0 10px 0;
-	
+
 }
 
 .secondary {
 	padding : 20px 0;
+}
+
+.sumber-data{
+	color : #aaa;
+	font-size : 12px;
 }
 #map {
 	height: 400px;
